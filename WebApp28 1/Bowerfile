@@ -1,0 +1,30 @@
+# Add bootstrap and sass frameworks
+
+asset 'bootstrap-sass-official'
+
+# Add angular
+
+# START_HIGHLIGHT
+# END_HIGHLIGHT
+asset 'angular', '~> 1.5'
+resolution 'angular', '1.5'
+
+# Add angular mock for testing with injections
+
+asset 'angular-mocks'
+
+# Add angular routes
+
+asset 'angular-route'
+
+# Add angular ressource
+
+asset 'angular-resource'
+
+# Add angular animate
+
+asset 'angular-animate'
+
+# Add bootstrap toggle
+
+asset 'bootstrap-toggle'

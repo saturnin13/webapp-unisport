@@ -1,0 +1,121 @@
+  <div class="row" ng-controller="profileController">
+    <div class="col-md-offset-2 col-md-8 col-xs-offset-1 col-xs-10">
+      <div class="well panel panel-default">
+        <div class="panel-body">
+          <div class="row row-eq-height">
+            <div class="col-xs-offset-3 col-xs-6 col-sm-offset-0 col-sm-3 text-center">
+              <%= image_tag(@profile_picture, class: "center-block img-circle img-thumbnail img-responsive") %>
+            </div>
+
+            <div class="col-xs-12 col-sm-9">
+              <a href="#" class="navbar-link" data-toggle="modal" data-target="#modifyProfile">
+                <i id="settings" class="fa fa-cog fa-lg pull-right" aria-hidden="true"></i>
+              </a>
+              <h2>{{profileData.first_name}} {{profileData.last_name}}</h2>
+              <p><i class="fa fa-university" aria-hidden="true"></i> <strong>University: </strong> {{profileData.university_name}} </p>
+              <p><i class="fa fa-file-text" aria-hidden="true"></i> <strong>Description: </strong> {{profileData.description}}</p>
+              <p><i class="fa fa-phone" aria-hidden="true"></i> <strong>Telephone number: </strong> {{profileData.telephone_number}}</p>
+
+              <!-- <p><strong>Favourites Sports: </strong>
+                <span class="label label-success tags" ng-click="test()">Rugby</span>
+                <span class="label label-success tags">Gym</span>
+                <span class="label label-success tags">Running</span>
+              </p> -->
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="modifyProfile" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+
+            <%= form_tag(profile_path(@profile), method: :put, multipart: true, "name" => "profileInformationForm") do -%>
+
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modify Profile Information</h4>
+              </div>
+
+                <div class="modal-body">
+
+                  <div class="alert alert-danger profile_update_errors" ng-show="displayErrorsProfilePopUp(profileInformationForm)">
+
+                          <div class="row">
+
+                            <div class="col-md-12">
+                              <h4>You have errors:</h4>
+                            </div>
+
+                          </div>
+
+                          <div class="row">
+
+                            <ul class="col-md-12">
+                              <li ng-show="profileInformationForm.telephone_number.$touched
+                              && !profileInformationForm.telephone_number.$error.required
+                              && profileInformationForm.telephone_number.$error.pattern">Not a valid phone number format</li>
+                              <li ng-show="profileInformationForm.telephone_number.$touched
+                              && !profileInformationForm.telephone_number.$error.required
+                              && profileInformationForm.telephone_number.$error.minlength">Phone Number too short, it must be at least 5 characters long</li>
+                              <li ng-show="profileInformationForm.telephone_number.$touched
+                              && !profileInformationForm.telephone_number.$error.required
+                              && profileInformationForm.telephone_number.$error.maxlength">Phone Number too long, it must be a maximum of 20 characters long</li>
+
+                            </ul>
+
+                          </div>
+
+                  </div>
+
+                  <div class="row">
+                    <div class="form-group col-md-12">
+                      <%= text_field_tag 'first_name', nil, placeholder:'First Name', :class => "form-control optionalForm", "ng-model" => "firstName", "value" =>"test" %>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="form-group col-md-12">
+                      <%= text_field_tag 'last_name', nil, placeholder: 'Last Name', :class => "form-control optionalForm", "ng-model" => "lastName" %>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="form-group col-md-12">
+                      <%= text_field_tag 'telephone_number', nil, placeholder: 'Telephone Number', :class => "form-control optionalForm",
+                      "ng-model" => "telephoneNumber", "ng-pattern" => '/^\+?(\d| )+$/', "ng-minlength" => "5", "ng-maxlength" => "20" %>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="form-group col-md-12">
+                      <%= text_field_tag 'description', nil, placeholder: 'Description', :class => "form-control optionalForm", "ng-model" => "description" %>
+                    </div>
+                  </div>
+
+                  <div class="input-group">
+                    <label class="input-group-btn">
+                      <span class="btn btn-primary">
+                        Find profile picture<%= file_field_tag 'image', placeholder: 'Profile picture',  "style" => "display:none;" %>
+                      </span>
+                    </label>
+                    <input type="text" class="form-control" readonly>
+                  </div>
+
+                </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <%= submit_tag "Save Profile", :class => "btn btn-primary", "ng-disabled" => "profileInformationForm.$invalid" %>
+              </div>
+
+            <% end %>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>

@@ -1,0 +1,51 @@
+#select_participants {
+
+  .btn-circle {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 12px;
+    line-height: 1.428571429;
+    border-radius: 15px;
+    margin-left: 4px;
+  }
+
+  .confirmedParticipant {
+    border-width: 3px;
+    border-color: #58B957;
+  }
+
+  .fa-phone {
+    padding-left: 3px;
+    padding-right: 7px;
+  }
+
+  #boxContainingParticipantToEvent {
+
+    padding-top: 0px;
+    padding-bottom: 6px;
+
+    p {
+      margin-bottom: 5px;
+    }
+
+    #participant_name {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .profile-link {
+      color: #423131;
+    }
+
+    .fa-times,
+    .fa-check {
+      padding-right: 0px;
+    }
+  }
+
+  .participant_buttons {
+    margin-top: 12px;
+  }
+}

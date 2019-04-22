@@ -1,0 +1,65 @@
+<div class="row" id="profile_created_events"
+    ng-controller="createdEventsController" ng-init="init()">
+
+   <div class="col-md-offset-2 col-md-8" ng-controller="participantSelectionController">
+     <h1>Created Events</h1>
+
+     <!-- No events layout -->
+     <ul class="event-list" ng-if="!hasCreatedEvents()" ng-cloak>
+       <li class="event-listing">
+         <div class="event_info">
+           <p id="no_event_msg">Sorry, you have not created events yet</p>
+         </div>
+       </li>
+     </ul>
+
+     <!-- Events layout -->
+     <ul class="event-list" id="created_events_accordion">
+       <li class="event-listing panel"
+           ng-repeat="event in createdEvents
+           | orderBy: 'date'">
+
+        <!-- Event layout -->
+        <div class="event_info" role="button" data-toggle="collapse"
+            data-parent="#created_events_accordion"
+            href="#info_extra_{{event.id}}"
+            aria-expanded="false" aria-controls="collapseExample"
+            class="event_info">
+
+          <%= render "shared/event_body" %>
+        </div>
+
+        <!-- Collapse layout (hidden layout revealed on click) -->
+         <div class="collapse" id="info_extra_{{event.id}}">
+           <div class="event_info_extra">
+
+             <div>
+               <p>Additional information</p>
+               <div class="well">
+                 <p ng-if="hasAdditionalInfos(event.additional_info)">
+                   <i class="fa fa-info-circle" aria-hidden="true"></i> {{event.additional_info}}</p>
+                 <p><i class="fa fa-map-marker" aria-hidden="true"></i> Meet at {{event.location}}</p>
+                 <p class="text-right"><i class="fa fa-user" aria-hidden="true"></i> Posted by {{event.first_name}} {{event.last_name}}, {{event.university_name}}</p>
+               </div>
+             </div>
+
+             <div class="join_button">
+               <button type="button" class="btn btn-success pull-right"
+                 ng-click="displayEventParticipants(event.id)">Manage event
+               </button>
+               <button type="button" class="btn btn-danger pull-right"
+                 ng-click="deleteEvent(event.id)">Cancel event
+               </button>
+             </div>
+
+           </div>
+         </div>
+
+      </li>
+     </ul>
+
+    <!-- Popup layout for participant selection to event -->
+    <%= render "event_participants_selection" %>
+  </div>
+
+</div>

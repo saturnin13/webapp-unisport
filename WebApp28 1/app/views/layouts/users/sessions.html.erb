@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Unisport</title>
+    <%= stylesheet_link_tag    'authentification', media: 'all' %>
+    <%= stylesheet_link_tag    'https://fonts.googleapis.com/css?family=Oxygen', media: 'all' %>
+
+    <%= javascript_include_tag 'application' %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+    <%= yield %>
+  </body>
+
+</html>

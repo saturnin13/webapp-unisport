@@ -1,0 +1,99 @@
+// Navigation bar styling
+
+$link-color: #f14444;
+$background-color: #fff;
+
+$border-size: 3px;
+
+nav.navbar {
+  background: $background-color;
+  border-color: #ccc;
+  box-shadow: 0 0 2px 0 #ccc;
+
+  .navbar-link {
+    color: $link-color;
+  }
+
+  .navbar-brand {
+    font-size: 24px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bolder;
+  }
+
+  .navbar-logo {
+    margin-top: 6px;
+    height: 40px;
+    float: left;
+    vertical-align: middle;
+  }
+
+  .dropdown-menu#logged_in {
+    margin-top: $border-size;
+
+    .navbar-login {
+      padding: 10px;
+      padding-bottom: 0px;
+    }
+
+    .navbar-login-session {
+      padding: 10px;
+      padding-bottom: 2px;
+      padding-top: 0px;
+    }
+  }
+
+  .dropdown-menu#login {
+    margin-top: $border-size;
+    width: 300px;
+    padding: 15px;
+
+    #login_button {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+    .fa {
+      padding-right: 0px;
+    }
+  }
+
+  .fa {
+    padding-right: 3px;
+  }
+}
+
+nav.navbar ul.navbar-nav {
+  li.navbar-elem {
+    color: $link-color;
+    border-style: solid;
+    border-width: 0 0 $border-size 0;
+    border-color: $background-color;
+
+    a.navbar-link:hover,
+    a.navbar-link:visited,
+    a.navbar-link:focus,
+    a.navbar-link:active {
+      background: $background-color;
+    }
+  }
+
+  li.navbar-elem:hover {
+    border-color: $link-color;
+  };
+
+  li.navbar-elem:visited,
+  li.navbar-elem:focus,
+  li.navbar-elem:active {
+    background: $background-color;
+  }
+}
+
+@media (max-width: 768px) {
+
+  nav.navbar ul.navbar-nav {
+    li.navbar-elem {
+      border-width: 0;
+    }
+  }
+
+}

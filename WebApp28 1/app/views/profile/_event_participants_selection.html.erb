@@ -1,0 +1,41 @@
+<div class="modal fade" id="select_participants" tabindex="-1" role="dialog" aria-labelledby="select_participants">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Select participant to join your event ({{getSpaceLeft()}} space{{getPlurial()}} remaining)</h4>
+      </div>
+
+      <div class="modal-body">
+        <div ng-show="!hasEventParticipants()" ng-cloak>Sorry, no-one joined your event yet</div>
+        <div class="container-fluid">
+
+          <div class="event-participant row"
+               ng-repeat="participant in eventParticipants">
+            <div class="col-md-12 well" id="boxContainingParticipantToEvent" ng-class="{confirmedParticipant:participantConfirmed(participant)}">
+
+              <div class="pull-right participant_buttons" ng-hide="participantConfirmed(participant)">
+                <button type="button" class="btn btn-success btn-circle btn-lg" ng-click="selectParticipant(participant.id, participant.participants)"><i class="fa fa-check" aria-hidden="true"></i></button>
+                <button type="button" class="btn btn-danger btn-circle btn-lg" ng-click="removeParticipant(participant.id)"><i class="fa fa-times" aria-hidden="true"></i></button>
+              </div>
+
+              <%= link_to "/profile/{{participant.id}}", :class => "profile-link" do %>
+                <h4 id="participant_name">{{participant.first_name}} {{participant.last_name}}</h4>
+              <% end %>
+              <p><i class="fa fa-university" aria-hidden="true"></i> {{participant.university_name}}</p>
+              <p><i class="fa fa-users" aria-hidden="true"></i> Paticipants: {{participant.participants}}</p>
+              <p ng-show="participantConfirmed(participant)">
+                <i class="fa fa-phone" aria-hidden="true"></i>Phone number: {{participant.telephone_number}}</p>
+              <p ng-hide="participant.message == ''">
+                <i class="fa fa-envelope" aria-hidden="true"></i> "{{participant.message}}"</p>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

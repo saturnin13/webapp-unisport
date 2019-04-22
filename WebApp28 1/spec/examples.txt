@@ -1,0 +1,31 @@
+example_id                                                    | status  | run_time        |
+------------------------------------------------------------- | ------- | --------------- |
+./spec/controllers/feed_controller_spec.rb[1:1]               | passed  | 0.01199 seconds |
+./spec/helpers/events_helper_spec.rb[1:1]                     | pending | 0 seconds       |
+./spec/helpers/profile_helper_spec.rb[1:1]                    | pending | 0 seconds       |
+./spec/models/event_participant_spec.rb[1:1:1]                | passed  | 0.38394 seconds |
+./spec/models/event_participant_spec.rb[1:1:2]                | passed  | 0.00803 seconds |
+./spec/models/event_spec.rb[1:1:1]                            | passed  | 0.0075 seconds  |
+./spec/models/event_spec.rb[1:1:2]                            | passed  | 0.01851 seconds |
+./spec/models/event_spec.rb[1:2:1]                            | passed  | 0.00651 seconds |
+./spec/models/event_spec.rb[1:2:2]                            | passed  | 0.005 seconds   |
+./spec/models/event_spec.rb[1:3:1]                            | passed  | 0.00699 seconds |
+./spec/models/event_spec.rb[1:3:2]                            | passed  | 0.00449 seconds |
+./spec/models/event_spec.rb[1:4:1]                            | passed  | 0.00701 seconds |
+./spec/models/event_spec.rb[1:4:2]                            | passed  | 0.00498 seconds |
+./spec/models/event_spec.rb[1:5:1]                            | passed  | 0.00703 seconds |
+./spec/models/event_spec.rb[1:5:2]                            | passed  | 0.00449 seconds |
+./spec/models/event_spec.rb[1:6:1]                            | passed  | 0.007 seconds   |
+./spec/models/event_spec.rb[1:6:2]                            | passed  | 0.00551 seconds |
+./spec/models/favourite_sport_spec.rb[1:1]                    | pending | 0 seconds       |
+./spec/models/sport_spec.rb[1:1:1]                            | passed  | 0.0256 seconds  |
+./spec/models/sport_spec.rb[1:1:2]                            | passed  | 0.01401 seconds |
+./spec/models/sport_spec.rb[1:1:3]                            | passed  | 0.08206 seconds |
+./spec/models/university_mail_spec.rb[1:1]                    | pending | 0 seconds       |
+./spec/models/user_spec.rb[1:1:1]                             | passed  | 0.03555 seconds |
+./spec/models/user_spec.rb[1:1:2]                             | passed  | 0.005 seconds   |
+./spec/sports/sports_hash_generator_spec.rb[1:1]              | passed  | 0.00302 seconds |
+./spec/university/email_spec.rb[1:1:1:1]                      | passed  | 0.07969 seconds |
+./spec/university/email_spec.rb[1:1:2:1]                      | passed  | 0.00201 seconds |
+./spec/university/mail_university_hash_generator_spec.rb[1:1] | passed  | 0.03803 seconds |
+./spec/views/events/create.html.erb_spec.rb[1:1]              | pending | 0 seconds       |

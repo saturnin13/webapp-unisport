@@ -1,0 +1,209 @@
+/*
+ *= require application
+ *= require bootstrap-datepicker3
+ *= require bootstrap-datetimepicker
+ *= require angucomplete-alt
+ *= require events
+ *= require event_participants_selection
+ *= require create_event
+ *= require bootstrap-toggle
+ *= require_self
+ */
+
+ /*
+  *  Main elements
+  */
+
+ body {
+   padding-top: 80px;
+ }
+
+ @media (min-width: 768px) {
+   .row-eq-height {
+     display: -webkit-box;
+     display: -webkit-flex;
+     display: -ms-flexbox;
+     display:         flex;
+   }
+ }
+
+// Modify the color of the settings icons
+a #settings {
+  color: #000000;
+}
+
+#boxContainingParticipantToEvent {
+  -webkit-transition: 0.25s linear all;
+  -moz-transition: 0.25s linear all;
+  -o-transition: 0.25s linear all;
+  transition: 0.25s linear all;
+}
+
+.fa {
+  padding-right: 2px;
+}
+
+.fa-file-text {
+  padding-left: 2px;
+  padding-right: 5px;
+}
+
+.fa-phone {
+  padding-left: 3px;
+  padding-right: 6px;
+}
+
+.img-responsive {
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
+}
+
+form {
+  // Setting layout at the beginning
+  // on focus border color is grey
+
+  input:focus,
+  input:focus.ng-valid,
+  input:focus.ng-valid.ng-empty,
+  input:focus.ng-invalid,
+  input:focus.ng-empty.ng-invalid,
+  input:focus.ng-empty.ng-valid,
+  input:focus.ng-invalid.ng-empty.ng-touched,
+  textarea:focus,
+  textarea:focus.ng-valid,
+  textarea:focus.ng-valid.ng-empty,
+  textarea:focus.ng-invalid,
+  textarea:focus.ng-empty.ng-invalid,
+  textarea:focus.ng-empty.ng-valid,
+  textarea:focus.ng-invalid.ng-empty.ng-touched,
+  select:focus,
+  select:focus.ng-valid,
+  select:focus.ng-valid.ng-empty,
+  select:focus.ng-invalid,
+  select:focus.ng-empty.ng-invalid,
+  select:focus.ng-empty.ng-valid,
+  select:focus.ng-invalid.ng-empty.ng-touched {
+    border-color: #66afe9;
+  }
+
+  input.ng-empty.ng-invalid,
+  input.ng-empty.ng-valid,
+  textarea.ng-empty.ng-invalid,
+  textarea.ng-empty.ng-valid,
+  select.ng-empty.ng-invalid,
+  select.ng-empty.ng-valid {
+    border-color: #ccc;
+  }
+
+  // Setting layout when invalid input for autocomplete
+  input.ng-invalid,
+  input.ng-invalid.ng-empty.ng-touched,
+  input.ng-invalid.optionalForm,
+  textarea.ng-invalid,
+  textarea.ng-invalid.ng-empty.ng-touched,
+  textarea.ng-invalid.optionalForm,
+  select.ng-invalid,
+  select.ng-invalid.ng-empty.ng-touched,
+  select.ng-invalid.optionalForm {
+    border-color: #F4423E;
+    border-width: 1px;
+  }
+
+  // Setting layout when valid input for autocomplete
+  input.ng-valid,
+  input.ng-valid.optionalForm,
+  input.ng-valid.ng-empty.ng-touched,
+  textarea.ng-valid,
+  textarea.ng-valid.optionalForm,
+  textarea.ng-valid.ng-empty.ng-touched,
+  select.ng-valid,
+  select.ng-valid.optionalForm,
+  select.ng-valid.ng-empty.ng-touched {
+    border-color: #58B957;
+    border-width: 1px;
+  }
+
+}
+
+/* Animation events */
+// From there event listing is duplicate from event css
+$heightEvent: 120px;
+$marginBottom: 26px;
+
+.event-listing {
+  border: 0px;
+}
+
+.event-listing.ng-enter,
+.event-listing.ng-leave,
+.event-listing.ng-move {
+  -webkit-transition: 1.0s cubic-bezier(.14,.64,.15,.99) all;
+  -moz-transition: 1.0s cubic-bezier(.14,.64,.15,.99) all;
+  -o-transition: 1.0s cubic-bezier(.14,.64,.15,.99) all;
+  transition: 1.0s cubic-bezier(.12,.88,.12,.95) all;
+}
+
+// New event added to the feed
+
+.event-listing.ng-enter {
+  opacity: 0;
+  height: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  overflow: hidden;
+}
+
+.event-listing.ng-enter.ng-enter-active,
+.event-listing.ng-leave {
+  opacity: 1;
+  height: $heightEvent;
+  margin-bottom: $marginBottom;
+  overflow: hidden;
+}
+
+// Event removed from the feed
+
+.event-listing.ng-leave.ng-leave-active {
+  opacity: 0;
+  height: 0;
+  margin-bottom: 0;
+  border: 0;
+  padding-top: 0;
+  padding-bottom:0;
+}
+
+.event-participant.ng-enter,
+.event-participant.ng-leave,
+.event-participant.ng-move {
+  -webkit-transition: 1.0s cubic-bezier(.14,.64,.15,.99) all;
+  -moz-transition: 1.0s cubic-bezier(.14,.64,.15,.99) all;
+  -o-transition: 1.0s cubic-bezier(.14,.64,.15,.99) all;
+  transition: 1.0s cubic-bezier(.12,.88,.12,.95) all;
+}
+
+.event-participant.ng-leave {
+  opacity: 1;
+  height: 118px;
+  width: 568px;
+  position: absolute;
+  right: 0;
+  overflow: visible;
+}
+
+.event-participant.ng-leave.ng-leave-active {
+  opacity: 0;
+  height: 0px;
+  width: 568px;
+  position: absolute;
+  right: -528px;
+}
+
+.profile_update_errors {
+  margin-bottom: 15px;
+
+  li {
+    margin-left: 30px;
+  }
+}

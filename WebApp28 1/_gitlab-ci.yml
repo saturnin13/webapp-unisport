@@ -1,0 +1,57 @@
+# Gitlab CI file
+before_script:
+
+stages:
+  - build
+  - test
+  - notify_on_failure
+  - deploy
+
+
+initial:
+  stage: build
+
+  script:
+    - sudo chown -R gitlab-runner $HOME/.bundle
+    - sudo gem install bundle
+    - bundle update
+    - bundle install
+    - bundle exec rake db:drop RAILS_ENV=test
+    - bundle exec rake db:create RAILS_ENV=test
+    - bundle exec rake db:migrate RAILS_ENV=test
+    - bundle exec rake db:seed RAILS_ENV=test
+
+
+test_frontend:
+  stage: test
+
+  script:
+    - bundle exec rake teaspoon RAILS_ENV=test
+
+
+test_backend:
+  stage: test
+
+  script:
+    - bundle exec rake RAILS_ENV=test
+
+
+on_failure:
+  stage: notify_on_failure
+
+  script:
+    - "curl -X POST --data-urlencode 'payload={\"text\": \"BUILD FAILED !!! go and check the mistake\"}' https://hooks.slack.com/services/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"
+
+  when: on_failure
+
+
+deployement:
+  stage: deploy
+
+  script:
+    - sudo gem install dpl
+    - sudo dpl --provider=heroku --app=unisport --api-key=$HEROKU_PRODUCTION_API_KEY
+    - "curl -X POST --data-urlencode 'payload={\"text\": \"Hey bitches, looks like a new version is online : <https://unisport.herokuapp.com/>\"}' https://hooks.slack.com/services/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"
+
+  only:
+    - master

@@ -1,0 +1,88 @@
+form {
+
+  #creationDate {
+    background: white;
+  }
+
+  .create_event_errors {
+    margin-bottom: 5px;
+
+    li {
+      margin-left: 30px;
+    }
+  }
+
+  // Setting layout at the beginning
+  // on focus border color is grey
+
+  input:focus,
+  input:focus.ng-valid,
+  input:focus.ng-valid.ng-empty,
+  input:focus.ng-invalid,
+  input:focus.ng-empty.ng-invalid,
+  input:focus.ng-empty.ng-valid,
+  input:focus.ng-invalid.ng-empty.ng-touched,
+  textarea:focus,
+  textarea:focus.ng-valid,
+  textarea:focus.ng-valid.ng-empty,
+  textarea:focus.ng-invalid,
+  textarea:focus.ng-empty.ng-invalid,
+  textarea:focus.ng-empty.ng-valid,
+  textarea:focus.ng-invalid.ng-empty.ng-touched,
+  select:focus,
+  select:focus.ng-valid,
+  select:focus.ng-valid.ng-empty,
+  select:focus.ng-invalid,
+  select:focus.ng-empty.ng-invalid,
+  select:focus.ng-empty.ng-valid,
+  select:focus.ng-invalid.ng-empty.ng-touched {
+    border-color: #66afe9;
+  }
+
+  input.ng-empty.ng-invalid,
+  input.ng-empty.ng-valid,
+  textarea.ng-empty.ng-invalid,
+  textarea.ng-empty.ng-valid,
+  select.ng-empty.ng-invalid,
+  select.ng-empty.ng-valid {
+    border-color: #ccc;
+  }
+
+  // Setting layout when invalid input for autocomplete
+  input.ng-invalid,
+  input.ng-invalid.ng-empty.ng-touched,
+  input.ng-invalid.optionalForm,
+  textarea.ng-invalid,
+  textarea.ng-invalid.ng-empty.ng-touched,
+  textarea.ng-invalid.optionalForm,
+  select.ng-invalid,
+  select.ng-invalid.ng-empty.ng-touched,
+  select.ng-invalid.optionalForm {
+    border-color: #F4423E;
+    border-width: 1px;
+  }
+
+  // Setting layout when valid input for autocomplete
+  input.ng-valid,
+  input.ng-valid.optionalForm,
+  input.ng-valid.ng-empty.ng-touched,
+  textarea.ng-valid,
+  textarea.ng-valid.optionalForm,
+  textarea.ng-valid.ng-empty.ng-touched,
+  select.ng-valid,
+  select.ng-valid.optionalForm,
+  select.ng-valid.ng-empty.ng-touched {
+    border-color: #58B957;
+    border-width: 1px;
+  }
+
+  textarea {
+    resize: none;
+    height: 100%;
+  }
+
+  .location-text-area {
+    height: 84px;
+  }
+
+}

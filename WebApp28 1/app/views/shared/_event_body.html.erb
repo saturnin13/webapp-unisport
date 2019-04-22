@@ -1,0 +1,37 @@
+
+<!-- Sport event Calendar time layout -->
+<time ng-class="eventStatus(event)">
+  <span class="day">{{event.day_name}}</span>
+  <span class="day_number">{{event.day_number}}</span>
+  <span class="month">{{event.month}}</span>
+  <span class="year">{{event.year}}</span>
+</time>
+
+<!-- Sport image of event -->
+<img ng-src="{{event.image_path}}" class="img">
+
+<!-- Sport Event infos -->
+<div class="info">
+  <div class="title pull-right col-md-5">
+    <div class="col-md-5 text-right">
+       <b>{{event.participants}}/{{event.needed}} <i class="fa fa-user" aria-hidden="true"></i></b>
+    </div>
+    <div class="progress col-md-7">
+      <div class="progress-bar progress-bar-success" role="progressbar"
+           aria-valuenow="{{event.participants / event.needed * 100}}"
+           aria-valuemin="0" aria-valuemax="100"
+           style="width: {{event.participants / event.needed * 100}}%;">
+      </div>
+    </div>
+  </div>
+  <h3 class="title">{{event.sport}}</h3>
+  <p class="desc"><i class="fa fa-clock-o" aria-hidden="true"></i> {{event.start_time}} to {{event.end_time}}</p>
+  <p class="desc"><i class="fa fa-map-marker" aria-hidden="true"></i> Around {{event.university_location}}</p>
+  <% if user_signed_in? %>
+    <div class="pull-right col-md-2 text-center" ng-if="hasCreatedEvent(event.created)">
+      <p id="created">Created</p>
+    </div>
+  <% end -%>
+  <p class="desc"><i class="fa fa-trophy" aria-hidden="true"></i> {{event.level}} </p>
+
+</div>

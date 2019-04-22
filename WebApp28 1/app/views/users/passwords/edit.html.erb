@@ -1,0 +1,58 @@
+<%= render 'shared/navigation_bar' %>
+
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+
+<div class="container">
+	<div class="row main">
+		<div class="main-login main-center">
+			<form class="form-horizontal" method="post" action="#">
+
+        <%= devise_error_messages! %>
+        <%= f.hidden_field :reset_password_token %>
+
+        <div class="panel-title text-center">
+          <h1 class="title">Change your Password</h1>
+          <hr/>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :password, :class => "cols-sm-2 control-label", :for => "password" do %>
+           New password <% if @minimum_password_length %>(<%= @minimum_password_length %> characters minimum)<% end %>
+          <% end %>
+					<div class="cols-sm-10">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+
+              <%= f.password_field :password, :autocomplete => "off",
+              :type => "password", :class => "form-control", :id => "password", :placeholder =>"Enter your Password" %>
+						</div>
+					</div>
+				</div>
+
+        <div class="form-group">
+          <%= f.label :password_confirmation, "Confirm Password", :class => "cols-sm-2 control-label", :for => "confirm" %>
+					<div class="cols-sm-10">
+						<div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+
+              <%= f.password_field :password_confirmation, :autocomplete => "off",
+              :type => "password", :class => "form-control", :id => "confirm", :placeholder =>"Confirm new Password" %>
+
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group ">
+          <%= f.submit "Change my password", :class => "btn btn-primary btn-lg btn-block login-button", :type => "submit" %>
+				</div>
+
+				<div class="login-register">
+		      <%= render "users/shared/links" %>
+		    </div>
+			</form>
+
+		</div>
+	</div>
+</div>
+
+<% end %>

@@ -1,0 +1,58 @@
+/*
+ *= require application
+ *= require bootstrap-datepicker3
+ *= require bootstrap-datetimepicker
+ *= require angucomplete-alt
+ *= require events
+ *= require create_event
+ *= require bootstrap-toggle
+ *= require_self
+ */
+
+ /*
+  *  Main elements
+  */
+
+ body {
+   padding-top: 80px;
+ }
+
+ // Create event styling
+
+ /*
+  *  Filters styling
+  */
+
+ .highlightLetters {
+    color: #ff0000;
+ }
+
+ #input-date {
+   background-color: #ffffff;
+ }
+
+ // toogle checkbox styling
+ #uni_toggle_checkbox {
+   .toggle-handle {
+     padding-right: 40px;
+   }
+
+   .btn {
+     border-radius: 7px;
+   }
+
+   .btn .toggle-off,
+   .btn .toggle-on {
+     background-color: #ffffff;
+   }
+
+   .btn .toggle-handle {
+     border-radius: 5px;
+     background-color: #e6e6e6;
+   }
+
+   .slow .toggle-group {
+     transition: left 1s;
+     -webkit-transition: left 1s;
+   }
+ }

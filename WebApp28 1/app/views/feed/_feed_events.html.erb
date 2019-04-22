@@ -1,0 +1,195 @@
+<div class="row" id="feed_events" ng-controller="eventListController">
+   <div class="col-md-offset-2 col-md-8">
+
+     <ul class="event-list" id="accordion">
+      <li class="event-listing panel"
+          ng-repeat="event in result = (getFeedScope().events
+          | filter: {university_location: filterLocation,
+                     sport: filterSport,
+                     date: convertFilterDate(),
+                     university_name: filterUniversity}
+          | orderBy: 'date_time')">
+
+        <% if user_signed_in? %>
+
+        <!-- Event layout -->
+        <div class="event_info" role="button" data-toggle="collapse"
+            data-parent="#accordion"
+            href="#info_extra_{{event.id}}"
+            aria-expanded="false" aria-controls="collapseExample">
+
+          <%= render "shared/event_body" %>
+        </div>
+
+        <!-- Collapse layout (hidden layout revealed on click) -->
+         <div class="collapse" id="info_extra_{{event.id}}">
+           <div class="event_info_extra">
+             <div>
+               <p>Additional information</p>
+               <div class="well">
+                 <p ng-if="hasAdditionalInfos(event.additional_info)">
+                   <i class="fa fa-info-circle" aria-hidden="true"></i> {{event.additional_info}}</p>
+                 <p><i class="fa fa-map-marker" aria-hidden="true"></i> Meet at {{event.location}}</p>
+
+                 <p class="text-right"><i class="fa fa-user" aria-hidden="true"></i>
+                   <%= link_to "/profile/{{event.creator_id}}", :class => "no_color_link" do %>
+                      Posted by {{event.first_name}} {{event.last_name}}, {{event.university_name}}
+                   <% end %>
+                 </p>
+
+               </div>
+             </div>
+
+             <div class="join_button">
+               <button type="button" class="btn btn-success pull-right"
+                 data-toggle="modal"
+                 data-target="#join_event"
+                 ng-disabled="isNotEventAccessible(event)"
+                 ng-click="setEventId(event.id)">Ask to join!
+               </button>
+             </div>
+
+           </div>
+         </div>
+
+         <% else %>
+
+         <div class="event_info">
+           <%= render "shared/event_body" %>
+         </div>
+
+         <% end %>
+
+       </li>
+
+       <li ng-show="showMessageNoEvents()" ng-if="result.length == 0" class="event-listing panel">
+
+         <div class="event_info">
+           <p id="no_event_msg">Sorry, we could not find any events</p>
+         </div>
+
+       </li>
+
+     </ul>
+
+     <!-- Join event modal (pop up) -->
+      <div class="modal fade" id="join_event" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Join Event Information</h4>
+            </div>
+
+            <form name="joinEventForm">
+               <div class="modal-body">
+                  <div class="alert alert-danger create_event_errors" ng-show="displayErrorsJoinPopUp(joinEventForm)">
+
+                    <div class="row">
+
+                      <div class="col-md-12">
+                        <h4>You have errors:</h4>
+                      </div>
+
+                    </div>
+
+                    <div class="row">
+
+                      <ul class="col-md-12">
+                        <li ng-show="joinEventForm.numberOfPeople.$touched
+                        && joinEventForm.numberOfPeople.$error.required">Number of people coming required</li>
+                        <li ng-show="joinEventForm.numberOfPeople.$touched
+                        && joinEventForm.numberOfPeople.$error.max">Too many people coming max is {{getEventById(currentEventId).needed - getEventById(currentEventId).participants}}</li>
+                        <li ng-show="joinEventForm.numberOfPeople.$touched
+                        && joinEventForm.phoneNumber.$error.required">Phone number required</li>
+                        <li ng-show="joinEventForm.phoneNumber.$touched
+                        && !joinEventForm.phoneNumber.$error.required
+                        && joinEventForm.phoneNumber.$error.minlength">Phone Number too short, it must be at least 5 characters long</li>
+                        <li ng-show="joinEventForm.phoneNumber.$touched
+                        && !joinEventForm.phoneNumber.$error.required
+                        && joinEventForm.phoneNumber.$error.maxlength">Phone Number too long, it must be a maximum of 20 characters long</li>
+                        <li ng-show="joinEventForm.phoneNumber.$touched
+                        && !joinEventForm.phoneNumber.$error.required
+                        && joinEventForm.phoneNumber.$error.pattern">Not a valid phone number format</li>
+
+                      </ul>
+
+                    </div>
+
+                  </div>
+
+                 <div class="row">
+                   <div class="col-md-12">
+                     <h4>Number of people coming</h4>
+                   </div>
+
+                   <div class="form-group col-md-12">
+                     <input type="number"
+                       name="numberOfPeople"
+                       class="form-control"
+                       placeholder="Number of people coming"
+                       ng-model="eventCreatedInfo.participants"
+                       ng-required="true"
+                       ng-max="getEventById(currentEventId).needed - getEventById(currentEventId).participants">
+                     </input>
+                   </div>
+
+                 </div>
+
+                 <!-- Ask for phone number only if phone number not already given -->
+
+                 <div class="row" ng-show="askForTelephone()">
+
+                   <div class="col-md-12">
+                     <h4>Phone Number</h4>
+                   </div>
+
+                   <div class="form-group col-md-12">
+                     <input type="text"
+                       name="phoneNumber"
+                       class="form-control"
+                       placeholder="eg: 07904562185"
+                       ng-model="eventCreatedInfo.phone"
+                       ng-required="askForTelephone()"
+                       ng-minlength="5"
+                       ng-pattern="/^\+?(\d| )+$/"
+                       ng-maxlength="20">
+                     </input>
+                   </div>
+
+                 </div>
+
+                 <div class="row">
+
+                   <div class="col-md-12">
+                     <h4>Message (Optional)</h4>
+                   </div>
+
+                   <div class="form-group col-md-12">
+                     <textarea type="text"
+                         rows="6"
+                         class="form-control optionalForm"
+                         placeholder="Give any information you want to the event creator"
+                         ng-model="eventCreatedInfo.message"
+                         ng-required="false"></textarea>
+                   </div>
+
+                 </div>
+
+               </div>
+
+            </form>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-success" data-dismiss="modal"
+                ng-click="joinEvent()" ng-disabled="joinEventForm.$invalid">Send</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+   </div>
+ </div>

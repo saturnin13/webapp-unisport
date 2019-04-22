@@ -1,0 +1,253 @@
+<div ng-controller="createEventController">
+  <div class="modal fade" id="createEventModal" tabindex="-1" role="dialog" aria-labelledby="createEventModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Add an Event</h4>
+        </div>
+
+        <form name="creationEventForm">
+
+          <div class="modal-body">
+
+            <div class="alert alert-danger create_event_errors" ng-show="displayErrors(creationEventForm)">
+
+              <div class="row">
+
+                <div class="col-md-12">
+                  <h4>You have errors:</h4>
+                </div>
+
+              </div>
+
+              <div class="row">
+
+                <ul class="col-md-12">
+                  <li ng-show="displayErrorSportEmpty(creationEventForm)">Sport required</li>
+                  <li ng-show="displayErrorSportinvalid(creationEventForm)">Sport not valid</li>
+
+                  <li ng-show="displayErrorPeopleEmpty(creationEventForm)">Number of people needed required</li>
+
+                  <li ng-show="displayErrorStartBiggerThanEnd(creationEventForm)">The starting time must be before the ending time</li>
+
+                  <li ng-show="displayErrorUniversityLocationEmpty(creationEventForm)">University location required</li>
+                  <li ng-show="displayErrorUniversityLocationInvalid(creationEventForm)">University location not valid</li>
+
+                  <li ng-show="diplayErrorLocationRequired(creationEventForm)">Exact location required</li>
+
+                  <li ng-show="displayErrorPhoneEmpty(creationEventForm)">Phone number required</li>
+                  <li ng-show="diplayErrorPhoneTooShort(creationEventForm)">Phone Number too short (at least 5 characters long)</li>
+                  <li ng-show="diplayErrorPhoneTooLong(creationEventForm)">Phone Number too long (maximum of 20 characters long)</li>
+                  <li ng-show="displayErrorPhoneInvalidFormat(creationEventForm)">Phone number format not valid </li>
+
+                </ul>
+
+              </div>
+
+            </div>
+            <!-- END of Error display div -->
+
+            <div class="row">
+              <div class="col-md-12">
+                <h4>Sport Information</h4>
+              </div>
+            </div>
+
+            <div class="row">
+
+              <div class="form-group col-md-8">
+                <angucomplete-alt id="sportCreation"
+                          selected-object="creationSportSelected"
+                          title-field="name"
+                          search-fields="name"
+                          placeholder="Choose your sport"
+                          minlength="1"
+                          local-data="sports"
+                          text-searching="Finding matching Universities"
+                          text-no-results="Sorry, sport not found"
+                          auto-match="true"
+                          focus-first="true"
+                          input-class="form-control form-control-small"
+                          pause="0"
+                          input-changed="creationSportUpdated"
+                          quantity="8"
+                          match-class="highlightLetters"
+                          field-required="true"
+                          field-required-class="required"
+                          input-name="sport">
+                </angucomplete-alt>
+              </div>
+
+              <div class="form-group col-md-4">
+                <select class="form-control"
+                        ng-model="selectedLevelString"
+                        ng-change="updateLevelValue()"
+                        ng-required="true">
+                  <option selected="selected">Any level</option>
+                  <option>Beginner</option>
+                  <option>Intermediate</option>
+                  <option>Advanced</option>
+                </select>
+              </div>
+
+            </div>
+
+            <div class="row">
+
+              <div class="form-group col-md-12">
+                <input type="number"
+                  name="peopleComing"
+                  class="form-control"
+                  placeholder="How many other people do you need? (min: 1)"
+                  ng-model="event.needed"
+                  ng-required="true"></input>
+              </div>
+
+            </div>
+
+            <div class="row row-eq-height">
+
+              <div class="col-md-6">
+
+                <h4>Date and Time</h4>
+
+                <div class="form-group">
+                  <div id="creationDatePicker" class="input-group date" data-provide="datepicker" data-date-format="DD dd MM yyyy" data-date-autoclose="true"
+                      data-date-clear-btn="true" data-date-today-highlight="true" data-date-max-view-mode="0" data-date-start-date="today">
+                    <input type="button" class="form-control" ng-model="event.date" id="creationDate" ng-required="true" readonly>
+                    <div class="input-group-addon">
+                      <i class="fa fa-calendar" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                    <div class='input-group date' id='datetimepickerStart'>
+                        <input type='button'
+                               name="startTime"
+                               class="form-control"
+                               ng-model="event.start_time"
+                               ng-required="true"
+                               ng-click="openStartTimePicker()"
+                               value="15:00"/>
+                        <span class="input-group-addon">
+                          <i class="fa fa-clock-o" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class='input-group date' id='datetimepickerEnd'>
+                        <input type='button'
+                               name="endTime"
+                               class="form-control"
+                               ng-model="event.end_time"
+                               ng-required="true"
+                               ng-click="openEndTimePicker()"
+                               value="16:00"/>
+                        <span class="input-group-addon">
+                          <i class="fa fa-clock-o" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                </div>
+
+              </div>
+
+              <div class="col-md-6">
+
+                <h4>Location</h4>
+
+                <div class="form-group">
+                  <angucomplete-alt id="locationSelection"
+                            selected-object="creationLocationSelected"
+                            title-field="university_name"
+                            search-fields="university_name"
+                            placeholder="Choose your university location"
+                            minlength="1"
+                            local-data="universities"
+                            text-searching="Finding matching Universities"
+                            text-no-results="Sorry, university not found"
+                            auto-match="true"
+                            focus-first="true"
+                            input-class="form-control form-control-small"
+                            pause="0"
+                            input-changed="creationLocationUpdated"
+                            quantity="5"
+                            match-class="highlightLetters"
+                            field-required="true"
+                            field-required-class="required"
+                            input-name="location">
+                  </angucomplete-alt>
+                </div>
+
+                <div class="form-group">
+                  <textarea type="text"
+                    name="locationField"
+                    class="form-control location-text-area"
+                    placeholder="Choose exact location description"
+                    ng-model="event.location"
+                    ng-required="true">
+                  </textarea>
+                </div>
+
+              </div>
+
+            </div>
+
+            <div ng-show="askForTelephone()">
+
+              <div class="row">
+                <div class="col-md-12">
+                  <h4>Register Phone Number</h4>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="form-group col-md-12">
+                  <input type="text"
+                    name="phoneNumber"
+                    class="form-control"
+                    placeholder="Participants will need it to contact you"
+                    ng-model="event.phone"
+                    ng-required="askForTelephone()"
+                    ng-pattern="/^\+?(\d| )+$/"
+                    ng-minlength="5"
+                    ng-maxlength="20"></input>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <h4>Additional Information (Optional)</h4>
+              </div>
+            </div>
+
+            <!-- end of TODO -->
+
+            <div class="form-group">
+              <textarea type="text"
+                  rows="3"
+                  class="form-control optionalForm"
+                  placeholder="Add here any additional info related to the event"
+                  aria-describedby="sizing-addon2"
+                  ng-model="event.additional_info">
+              </textarea>
+            </div>
+
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <!-- FIXME: dissmiss only on success -->
+            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="createEvent()" ng-disabled="creationEventForm.$invalid">Save changes</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

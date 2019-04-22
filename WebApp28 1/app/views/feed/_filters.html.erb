@@ -1,0 +1,79 @@
+<div ng-controller="filterController">
+  <div class="row">
+
+    <% if user_signed_in? %>
+    <div class="col-md-offset-2 col-md-2">
+    <% else %>
+    <div class="col-md-offset-2 col-md-3">
+    <% end %>
+      <angucomplete-alt id="universitySelection"
+                selected-object="universitySelected"
+                title-field="university_name"
+                search-fields="university_name"
+                placeholder="Location"
+                minlength="1"
+                local-data="universities"
+                text-searching="Finding matching Universities"
+                text-no-results="Sorry, university not found"
+                auto-match="true"
+                focus-first="true"
+                input-class="form-control form-control-small"
+                pause="0"
+                input-changed="inputUniversityUpdated"
+                quantity="8"
+                match-class="highlightLetters">
+      </angucomplete-alt>
+    </div>
+
+    <% if user_signed_in? %>
+    <div class="btn-group col-md-2 dropdown">
+    <% else %>
+    <div class="btn-group col-md-3 dropdown">
+    <% end %>
+      <angucomplete-alt id="sportSelection"
+                selected-object="sportSelected"
+                title-field="name"
+                search-fields="name"
+                placeholder="Sport"
+                minlength="1"
+                local-data="sports"
+                text-searching="Finding matching Sports"
+                text-no-results="Sorry, sport not found"
+                auto-match="true"
+                focus-first="true"
+                input-class="form-control form-control-small"
+                pause="0"
+                input-changed="inputSportUpdated"
+                quantity="8"
+                match-class="highlightLetters">
+      </angucomplete-alt>
+      <!-- <button type="button" class="btn btn-default btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        {{selectedSport}} </span>
+      </button>
+      <ul class="dropdown-menu col-md-2">
+        <div class="dropdown-item" ng-click="updateSport('All Sports')">All Sports</div>
+        <li ng-repeat="sport in sports">
+          <div class="dropdown-item" ng-click="$parent.updateSport(sport.name)">{{sport.name}}</div>
+        </li>
+      </ul> -->
+    </div>
+
+    <div class="col-md-2">
+      <div id="dateFilter" class="input-group date" data-provide="datepicker" data-date-format="DD dd MM yyyy" data-date-autoclose="true"
+          data-date-clear-btn="true" data-date-today-highlight="true" data-date-max-view-mode="0" data-date-start-date="today">
+        <input type="text" class="form-control" ng-model="getFeedScope().filterDate" id="input-date" readonly>
+        <div class="input-group-addon">
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+        </div>
+      </div>
+    </div>
+
+    <% if user_signed_in? %>
+    <div class="btn-group col-md-2" id="uni_toggle_checkbox" ng-show="showToggle()">
+      <input id="universityToggle" type="checkbox" checked data-toggle="toggle" data-off="Only my University" data-on="All universities"
+          data-style="slow" data-width="100%" data-onstyle="default" data-offstyle="default">
+    </div>
+    <% end %>
+
+  </div>
+</div>
