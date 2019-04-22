@@ -1,0 +1,49 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2">
+      <!--Sidebar content-->
+
+      Search: <input ng-model="query">
+      Sort by:
+      <select ng-model="orderProp">
+        <option value="name">Alphabetical</option>
+        <option value="age">Newest</option>
+      </select>
+      <button class='wub' ng-class = >Animation Button</button>
+      <div class="dropdown open">
+        <input ng-model="query2">
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+          <li ng-repeat="phone in getPhone() | filter:query2 | orderBy:orderProp">
+            <a class="dropdown-item" href="#/phones/{{phone.id}}">{{phone.name}}</a>
+          </li>
+        </div>
+      </div>
+      <li ng-repeat="dd in [1,2,3]">
+        <div>{{test}}</div>
+      </li>
+
+      <div ng-class="{on:onOff}" class="highlight">
+        Highlight this box
+      </div>
+      <button ng-click="onOff=!onOff">Toggle</button>
+      <button ng-click="events.push({name:'Steve Jobs'})">Add item to ng-repeat</button>
+      <button ng-click="events.pop()">Remove item from ng-repeat</button>
+      <div class="test" ng-repeat="event in events">
+        <div>test</div>
+      </div>
+
+    </div>
+    <div class="col-md-10">
+      <!--Body content-->
+
+      <ul class="phones">
+        <li ng-repeat="phone in phones | filter:query | orderBy:orderProp"
+            class="thumbnail phone-listing" ng-class="{reordered: orderChange}">
+          <a href="#/phones/{{phone.id}}" class="thumb"><img ng-src="{{phone.imageUrl}}" alt="{{phone.name}}"></a>
+          <a href="#/phones/{{phone.id}}">{{phone.name}}</a>
+          <p>{{phone.snippet}}</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

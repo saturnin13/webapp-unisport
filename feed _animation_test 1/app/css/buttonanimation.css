@@ -1,0 +1,15 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:100,400);
+.wub {
+    padding: 1em 2em;
+    position: relative;
+    background: #bed970;
+    border: 0;
+    border-radius: 50px;
+    color: white;
+    cursor: pointer;
+    outline: none;
+    font-size: 1.5em;
+    font-weight: 100;
+    -webkit-transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+}
