@@ -1,0 +1,20 @@
+.test {
+  background-color: red;
+}
+
+.test.ng-enter {
+  -moz-transition: 7s linear all;
+  -o-transition: 7s linear all;
+  -webkit-transition: 7s linear all;
+  transition: 7s linear all;
+}
+
+
+.test.ng-enter {
+  width: 0px;
+}
+
+.test.ng-enter.ng-enter-active {
+  width: 1920px;
+}
+
