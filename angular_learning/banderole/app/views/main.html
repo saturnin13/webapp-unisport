@@ -1,0 +1,9 @@
+<div ng-app="app">
+  <div ng-controller="SomeController">
+    <accordion>
+      <expander class="expander" expander-title="expander.title" ng-repeat="expander in expanders">
+        {{expander.text}}
+      </expander>
+    </accordion>
+  </div>
+</div>

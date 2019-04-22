@@ -1,0 +1,13 @@
+{
+  "name": "deuxieme-test",
+  "version": "0.0.0",
+  "dependencies": {
+    "angular": "^1.4.0",
+    "angular-route": "^1.5.5"
+  },
+  "devDependencies": {
+    "angular-mocks": "^1.4.0"
+  },
+  "appPath": "app",
+  "moduleName": "deuxiemeTestApp"
+}

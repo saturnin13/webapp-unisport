@@ -1,0 +1,15 @@
+.expander {
+  border: 1px solid black;
+  width: 250px;
+}
+
+.expander > .title {
+  background-color: black; color: white;
+  padding: .1em .3em; cursor: pointer;
+}
+
+.expander > .body {
+  padding: .1em .3em;
+}
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm1haW4uY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0Usd0JBQXdCO0VBQ3hCLGFBQWE7Q0FDZDs7QUFFRDtFQUNFLHdCQUF3QixDQUFDLGFBQWE7RUFDdEMsbUJBQW1CLENBQUMsZ0JBQWdCO0NBQ3JDOztBQUVEO0VBQ0UsbUJBQW1CO0NBQ3BCIiwiZmlsZSI6Im1haW4uY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmV4cGFuZGVyIHtcbiAgYm9yZGVyOiAxcHggc29saWQgYmxhY2s7XG4gIHdpZHRoOiAyNTBweDtcbn1cblxuLmV4cGFuZGVyID4gLnRpdGxlIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogYmxhY2s7IGNvbG9yOiB3aGl0ZTtcbiAgcGFkZGluZzogLjFlbSAuM2VtOyBjdXJzb3I6IHBvaW50ZXI7XG59XG5cbi5leHBhbmRlciA+IC5ib2R5IHtcbiAgcGFkZGluZzogLjFlbSAuM2VtO1xufVxuIl19 */
